@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "f97815b1-5cb2-48f6-b101-11c34a7f929c",
+		"name": "Upload File API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7853232",
+		"_collection_link": "https://bkt-dev-2985.postman.co/workspace/BKT-Dev-Workspace~6a86e883-6b02-4ef4-9050-01034905f59f/collection/7853232-f97815b1-5cb2-48f6-b101-11c34a7f929c?action=share&source=collection_link&creator=7853232"
+	},
+	"item": [
+		{
+			"name": "Post data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>Collabora URL</th>",
+							"        <th>File ID</th>",
+							"        <th>File URL</th>",
+							"        <th>Message</th>",
+							"        <th>WOPI File URL</th>",
+							"    </tr>",
+							"    ",
+							"    {{#each response}}",
+							"        <tr>",
+							"            <td>{{collabora_url}}</td>",
+							"            <td>{{file_id}}</td>",
+							"            <td>{{file_url}}</td>",
+							"            <td>{{message}}</td>",
+							"            <td>{{wopi_file_url}}</td>",
+							"        </tr>",
+							"    {{/each}}",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciDFiawLI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjA2",
+						"type": "text"
+					},
+					{
+						"key": "AppName",
+						"value": "tvmn",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": [
+								"/D:/projects/Thư viện mầm non/data/Giáo án/Tài liệu hỗ trợ/KPKH/powerpoint/Đồ dùng gia đình.ppt",
+								"/D:/projects/Thư viện mầm non/data/Giáo án/Tài liệu hỗ trợ/KPKH/powerpoint/Đồ dùng học tập.ppt"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "https://data.bkt.net.vn/upload",
+					"protocol": "https",
+					"host": [
+						"data",
+						"bkt",
+						"net",
+						"vn"
+					],
+					"path": [
+						"upload"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		}
+	]
+}
